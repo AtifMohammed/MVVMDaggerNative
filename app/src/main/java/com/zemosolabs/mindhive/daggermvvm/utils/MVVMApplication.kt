@@ -2,6 +2,7 @@ package com.zemosolabs.mindhive.daggermvvm.utils
 
 import android.app.Application
 
+
 /**
  * @author atif
  * Created on 20/04/18.

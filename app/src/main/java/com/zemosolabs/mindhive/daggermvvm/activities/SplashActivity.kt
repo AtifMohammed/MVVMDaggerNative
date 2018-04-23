@@ -3,18 +3,25 @@ package com.zemosolabs.mindhive.daggermvvm.activities
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.zemosolabs.mindhive.daggermvvm.R
 import com.zemosolabs.mindhive.daggermvvm.databinding.ActivitySplashBinding
 import com.zemosolabs.mindhive.daggermvvm.navigators.SplashNavigator
 import com.zemosolabs.mindhive.daggermvvm.view_models.SplashViewModel
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity(), SplashNavigator{
 
-    var splashViewModel : SplashViewModel = SplashViewModel()
+    private val TAG = "SplashActivity"
+
+    @Inject
+    lateinit var splashViewModel : SplashViewModel
 
     //region Activity Methods
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         val activitySplashBinding : ActivitySplashBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         activitySplashBinding.splash = splashViewModel
@@ -30,11 +37,11 @@ class SplashActivity : AppCompatActivity(), SplashNavigator{
     //region Navigator
 
     override fun closeApplication() {
-
+        Log.d(TAG, "Activity Closed")
     }
 
     override fun openMainActivity() {
-
+        Log.d(TAG, "Main Activity Launch called")
     }
 
     //endregion

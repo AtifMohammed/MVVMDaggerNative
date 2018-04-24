@@ -43,6 +43,7 @@ class SplashActivity : AppCompatActivity(), SplashNavigator{
 
     override fun openMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     //endregion

@@ -11,17 +11,15 @@ import android.view.ViewGroup
 import com.zemosolabs.mindhive.daggermvvm.R
 import com.zemosolabs.mindhive.daggermvvm.beans.DownloadData
 import com.zemosolabs.mindhive.daggermvvm.databinding.FragmentFileDownloadBinding
+import com.zemosolabs.mindhive.daggermvvm.service_providers.ResourceProvider
 import com.zemosolabs.mindhive.daggermvvm.view_models.FileDownloadFragmentVM
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class FileDownloadFragment : Fragment() {
 
     @Inject lateinit var downloadViewModel : FileDownloadFragmentVM
+    @Inject lateinit var resourceProvider: ResourceProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -32,7 +30,7 @@ class FileDownloadFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binder : FragmentFileDownloadBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_file_download, container, false)
         binder.downloadVm = downloadViewModel
-        downloadViewModel.downloadData = DownloadData("Hello", "World")
+        downloadViewModel.downloadData = DownloadData(resourceProvider.getString(R.string.hello), resourceProvider.getString(R.string.world))
         return binder.root
     }
 

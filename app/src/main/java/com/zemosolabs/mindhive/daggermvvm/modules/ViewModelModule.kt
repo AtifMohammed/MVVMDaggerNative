@@ -1,7 +1,8 @@
 package com.zemosolabs.mindhive.daggermvvm.modules
 
+import com.zemosolabs.mindhive.daggermvvm.interfaces.IResourceProvider
+import com.zemosolabs.mindhive.daggermvvm.interfaces.IWebServiceProvider
 import com.zemosolabs.mindhive.daggermvvm.scopes.ActivityScope
-import com.zemosolabs.mindhive.daggermvvm.service_providers.WebServiceProvider
 import com.zemosolabs.mindhive.daggermvvm.view_models.FileDownloadFragmentVM
 import com.zemosolabs.mindhive.daggermvvm.view_models.SplashViewModel
 import dagger.Module
@@ -27,8 +28,8 @@ abstract class ViewModelModule {
         @ActivityScope
         @JvmStatic
         @Provides
-        fun provideFileDownloadVm(webServiceProvider: WebServiceProvider) : FileDownloadFragmentVM {
-            return FileDownloadFragmentVM(webServiceProvider)
+        fun provideFileDownloadVm(webServiceProvider: IWebServiceProvider, resourceProvider: IResourceProvider) : FileDownloadFragmentVM {
+            return FileDownloadFragmentVM(webServiceProvider, resourceProvider)
         }
     }
 

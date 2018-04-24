@@ -1,10 +1,9 @@
 package com.zemosolabs.mindhive.daggermvvm.modules
 
-import com.zemosolabs.mindhive.daggermvvm.beans.DownloadData
 import com.zemosolabs.mindhive.daggermvvm.fragments.FileDownloadFragment
-import com.zemosolabs.mindhive.daggermvvm.qualifiers.DownloadDataQualifier
 import com.zemosolabs.mindhive.daggermvvm.scopes.ActivityScope
 import com.zemosolabs.mindhive.daggermvvm.scopes.FragmentScope
+import com.zemosolabs.mindhive.daggermvvm.service_providers.WebServiceProvider
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -23,18 +22,9 @@ abstract class MainActivityModule {
         @JvmStatic
         @ActivityScope
         @Provides
-        fun provideDownloadData() : DownloadData {
-            return DownloadData("Hello World")
+        fun provideWebserviceProvider() : WebServiceProvider {
+            return WebServiceProvider()
         }
-
-        @JvmStatic
-        @ActivityScope
-        @Provides
-        @DownloadDataQualifier("download_url")
-        fun provideDownloadUrl() : String {
-            return "Something is better than nothing"
-        }
-
     }
 
     @FragmentScope

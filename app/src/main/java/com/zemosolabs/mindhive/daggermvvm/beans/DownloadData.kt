@@ -5,9 +5,9 @@ package com.zemosolabs.mindhive.daggermvvm.beans
  * Created on 24/04/18.
  */
 
-class DownloadData (private val message : String) {
+class DownloadData(private val downloadUrl: String, private val storageFile: String) {
 
-    fun getMessage() : String{
-        return message
+    fun getDownloadUrl() : String {
+        return downloadUrl
     }
 }

@@ -1,6 +1,7 @@
 package com.zemosolabs.mindhive.daggermvvm.fragments
 
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,13 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.zemosolabs.mindhive.daggermvvm.R
+import com.zemosolabs.mindhive.daggermvvm.beans.DownloadData
+import com.zemosolabs.mindhive.daggermvvm.databinding.FragmentFileDownloadBinding
+import com.zemosolabs.mindhive.daggermvvm.view_models.FileDownloadFragmentVM
 import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  *
  */
 class FileDownloadFragment : Fragment() {
+
+    @Inject lateinit var downloadViewModel : FileDownloadFragmentVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -23,7 +30,10 @@ class FileDownloadFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_file_download, container, false)
+        val binder : FragmentFileDownloadBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_file_download, container, false)
+        binder.downloadVm = downloadViewModel
+        downloadViewModel.downloadData = DownloadData("Hello", "World")
+        return binder.root
     }
 
     companion object {

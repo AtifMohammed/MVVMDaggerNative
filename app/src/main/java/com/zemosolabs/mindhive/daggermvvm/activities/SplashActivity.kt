@@ -1,5 +1,6 @@
 package com.zemosolabs.mindhive.daggermvvm.activities
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -41,7 +42,7 @@ class SplashActivity : AppCompatActivity(), SplashNavigator{
     }
 
     override fun openMainActivity() {
-        Log.d(TAG, "Main Activity Launch called")
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     //endregion

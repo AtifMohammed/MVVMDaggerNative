@@ -10,4 +10,4 @@ import javax.inject.Qualifier
 @Qualifier
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
-annotation class DownloadDataQualifier(val value: String = "")
+annotation class NameQualifier(val value: String = "")

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 abstract class WebServiceModule {
 
     @Binds
-    abstract fun provideWebserviceProvider(webServiceProvider: WebServiceProvider) : IWebServiceProvider
+    abstract fun bindWebserviceProvider(webServiceProvider: WebServiceProvider) : IWebServiceProvider
 
     @Module
     companion object {

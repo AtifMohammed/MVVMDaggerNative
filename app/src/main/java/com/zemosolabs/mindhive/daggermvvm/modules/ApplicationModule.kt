@@ -30,7 +30,7 @@ abstract class ApplicationModule {
     abstract fun contributeMainActivityInjector() : MainActivity
 
     @Binds
-    abstract fun providesResourceProvider(resourceProvider: ResourceProvider) : IResourceProvider
+    abstract fun bindResourceProvider(resourceProvider: ResourceProvider) : IResourceProvider
 
     @Module
     companion object {

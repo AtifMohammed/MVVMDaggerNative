@@ -19,7 +19,7 @@ import javax.inject.Inject
 class FileDownloadFragment : Fragment() {
 
     @Inject lateinit var downloadViewModel : FileDownloadFragmentVM
-    @Inject lateinit var resourceProvider: ResourceProvider
+    @Inject lateinit var resourceProvider : ResourceProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)

@@ -7,6 +7,7 @@ import com.zemosolabs.mindhive.daggermvvm.activities.MainActivity
 import com.zemosolabs.mindhive.daggermvvm.activities.SplashActivity
 import com.zemosolabs.mindhive.daggermvvm.interfaces.IResourceProvider
 import com.zemosolabs.mindhive.daggermvvm.scopes.ActivityScope
+import com.zemosolabs.mindhive.daggermvvm.scopes.ApplicationScope
 import com.zemosolabs.mindhive.daggermvvm.service_providers.ResourceProvider
 import dagger.Binds
 import dagger.Module
@@ -29,18 +30,21 @@ abstract class ApplicationModule {
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun contributeMainActivityInjector() : MainActivity
 
+    @ApplicationScope
     @Binds
     abstract fun bindResourceProvider(resourceProvider: ResourceProvider) : IResourceProvider
 
     @Module
     companion object {
 
+        @ApplicationScope
         @JvmStatic
         @Provides
         fun provideApplicationContext (application : Application) : Context {
             return application.applicationContext
         }
 
+        @ApplicationScope
         @JvmStatic
         @Provides
         fun provideResourceProvider (context: Context) : Resources {

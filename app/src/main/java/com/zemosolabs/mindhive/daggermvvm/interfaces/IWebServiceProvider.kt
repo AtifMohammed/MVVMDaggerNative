@@ -5,5 +5,4 @@ package com.zemosolabs.mindhive.daggermvvm.interfaces
  * Created on 24/04/18.
  */
 interface IWebServiceProvider {
-
 }

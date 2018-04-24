@@ -3,6 +3,7 @@ package com.zemosolabs.mindhive.daggermvvm.components
 import android.app.Application
 import com.zemosolabs.mindhive.daggermvvm.modules.ApplicationModule
 import com.zemosolabs.mindhive.daggermvvm.modules.WebServiceModule
+import com.zemosolabs.mindhive.daggermvvm.scopes.ApplicationScope
 import com.zemosolabs.mindhive.daggermvvm.utils.MVVMApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -12,6 +13,7 @@ import dagger.Component
  * Created on 23/04/18.
  */
 
+@ApplicationScope
 @Component(
         modules = [ApplicationModule::class, WebServiceModule::class]
 )

@@ -1,4 +1,4 @@
-package com.zemosolabs.mindhive.daggermvvm.interfaces
+package com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces
 
 import android.support.annotation.StringRes
 

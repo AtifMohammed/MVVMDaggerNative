@@ -6,15 +6,19 @@ import android.view.View
 import com.android.databinding.library.baseAdapters.BR
 import com.zemosolabs.mindhive.daggermvvm.R
 import com.zemosolabs.mindhive.daggermvvm.beans.DownloadData
-import com.zemosolabs.mindhive.daggermvvm.interfaces.IResourceProvider
-import com.zemosolabs.mindhive.daggermvvm.interfaces.IWebServiceProvider
+import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.DownloadTask
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.DownloadPriority
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileDownloadListener
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
+import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
 
 /**
  * @author atif
  * Created on 24/04/18.
  */
-class FileDownloadFragmentVM constructor(private val webServiceProvider: IWebServiceProvider, private val resourceProvider: IResourceProvider) : BaseObservable() {
+class FileDownloadFragmentVM constructor(private val downloadSerializer: SerialExecutor, private val resourceProvider: IResourceProvider) : BaseObservable(), FileDownloadListener {
 
+    private val TAG = "FileDownloadFragmentVM"
     var downloadData : DownloadData? = null
 
     @Bindable var maxProgress = 100
@@ -37,7 +41,7 @@ class FileDownloadFragmentVM constructor(private val webServiceProvider: IWebSer
 
 
     fun getMessage() : String {
-        return downloadData!!.getDownloadUrl() + webServiceProvider
+        return downloadData!!.getDownloadUrl() + downloadSerializer
     }
 
     @Bindable(value = ["isDownloadInProgress"])
@@ -46,11 +50,29 @@ class FileDownloadFragmentVM constructor(private val webServiceProvider: IWebSer
     }
 
     fun startDownload(view : View) {
+        val downloadTasks : MutableList<DownloadTask> = ArrayList()
+        downloadTasks.add(DownloadTask())
         if(isDownloadInProgress){
-            webServiceProvider
+           downloadSerializer.addTask(downloadTasks, this, DownloadPriority.MEDIUM)
         }else{
 
         }
         this.isDownloadInProgress = this.isDownloadInProgress.not()
     }
+
+    //region File Download Callbacks
+
+    override fun downloadStatus(downloadedSize: Int, totalSize: Int) {
+    }
+
+    override fun onDownloadStarted(totalSize: Int) {
+    }
+
+    override fun onDownloadCompleted(downloadTasks: List<DownloadTask>) {
+    }
+
+    override fun onDownloadFailed(downloadTasks: List<DownloadTask>, errorMessage: String?) {
+    }
+
+    //endregion
 }

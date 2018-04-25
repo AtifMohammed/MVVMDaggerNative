@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.res.Resources
 import com.zemosolabs.mindhive.daggermvvm.activities.MainActivity
 import com.zemosolabs.mindhive.daggermvvm.activities.SplashActivity
-import com.zemosolabs.mindhive.daggermvvm.interfaces.IResourceProvider
+import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
 import com.zemosolabs.mindhive.daggermvvm.scopes.ActivityScope
 import com.zemosolabs.mindhive.daggermvvm.scopes.ApplicationScope
-import com.zemosolabs.mindhive.daggermvvm.service_providers.ResourceProvider
+import com.zemosolabs.mindhive.daggermvvm.service_providers.implementation.ResourceProviderImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -32,7 +32,7 @@ abstract class ApplicationModule {
 
     @ApplicationScope
     @Binds
-    abstract fun bindResourceProvider(resourceProvider: ResourceProvider) : IResourceProvider
+    abstract fun bindResourceProvider(resourceProviderImpl: ResourceProviderImpl) : IResourceProvider
 
     @Module
     companion object {

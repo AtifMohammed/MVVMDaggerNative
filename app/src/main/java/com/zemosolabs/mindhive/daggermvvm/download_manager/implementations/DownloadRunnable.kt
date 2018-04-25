@@ -1,9 +1,10 @@
 package com.zemosolabs.mindhive.daggermvvm.download_manager.implementations
 
 import android.util.Log
-import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.DownloadPriority
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileDownloadListener
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileExecutorListener
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.PriorityTask
 import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IWebServiceProvider
 
 /**
@@ -16,7 +17,7 @@ class DownloadRunnable constructor(
         private val fileExecutorListener: FileExecutorListener,
         private val fileDownloadListener: FileDownloadListener,
         private val downloadTasks : List<DownloadTask>,
-        private val priority: DownloadPriority): Runnable {
+        priority: Priority): PriorityTask(priority), Runnable {
 
     private val TAG = "DownloadRunnable"
 

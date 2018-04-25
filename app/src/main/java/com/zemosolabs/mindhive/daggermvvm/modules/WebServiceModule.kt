@@ -1,7 +1,9 @@
 package com.zemosolabs.mindhive.daggermvvm.modules
 
 import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.DownloadSerializer
+import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.PriorityQueue
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
+import com.zemosolabs.mindhive.daggermvvm.qualifiers.NameQualifier
 import com.zemosolabs.mindhive.daggermvvm.scopes.ApplicationScope
 import com.zemosolabs.mindhive.daggermvvm.service_providers.implementation.WebServiceProviderImpl
 import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IWebServiceProvider
@@ -37,9 +39,17 @@ abstract class WebServiceModule {
 
         @ApplicationScope
         @JvmStatic
+        @NameQualifier("Download")
         @Provides
-        fun provideDownloadSerializer(webServiceProvider: IWebServiceProvider) : SerialExecutor {
-            return DownloadSerializer(webServiceProvider)
+        fun providePriorityQueue() : PriorityQueue {
+            return PriorityQueue()
+        }
+
+        @ApplicationScope
+        @JvmStatic
+        @Provides
+        fun provideDownloadSerializer(webServiceProvider: IWebServiceProvider, @NameQualifier("Download") priorityQueue: PriorityQueue) : SerialExecutor {
+            return DownloadSerializer(webServiceProvider, priorityQueue)
         }
 
     }

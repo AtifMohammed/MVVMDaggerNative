@@ -7,7 +7,7 @@ import com.android.databinding.library.baseAdapters.BR
 import com.zemosolabs.mindhive.daggermvvm.R
 import com.zemosolabs.mindhive.daggermvvm.beans.DownloadData
 import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.DownloadTask
-import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.DownloadPriority
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileDownloadListener
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
 import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
@@ -53,9 +53,7 @@ class FileDownloadFragmentVM constructor(private val downloadSerializer: SerialE
         val downloadTasks : MutableList<DownloadTask> = ArrayList()
         downloadTasks.add(DownloadTask())
         if(isDownloadInProgress){
-           downloadSerializer.addTask(downloadTasks, this, DownloadPriority.MEDIUM)
-        }else{
-
+           downloadSerializer.addTask(downloadTasks, this, Priority.HIGH)
         }
         this.isDownloadInProgress = this.isDownloadInProgress.not()
     }

@@ -14,5 +14,5 @@ interface SerialExecutor {
      * @param fileDownloadListener callback to listen for the download events
      * @param priority priority of the download task
      */
-    fun addTask(downloadTask: List<DownloadTask>, fileDownloadListener: FileDownloadListener, priority: DownloadPriority)
+    fun addTask(downloadTask: List<DownloadTask>, fileDownloadListener: FileDownloadListener, priority: Priority)
 }

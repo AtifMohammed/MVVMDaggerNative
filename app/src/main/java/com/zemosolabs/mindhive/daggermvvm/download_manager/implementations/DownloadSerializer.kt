@@ -2,7 +2,7 @@ package com.zemosolabs.mindhive.daggermvvm.download_manager.implementations
 
 import android.support.annotation.NonNull
 import android.util.Log
-import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.DownloadPriority
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileDownloadListener
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileExecutorListener
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
@@ -13,13 +13,12 @@ import java.util.*
  * @author atif
  * Created on 24/04/18.
  */
-class DownloadSerializer constructor(private val webServiceProvider: IWebServiceProvider) : SerialExecutor, FileExecutorListener {
+class DownloadSerializer constructor(private val webServiceProvider: IWebServiceProvider, private val downloadTasks : PriorityQueue) : SerialExecutor, FileExecutorListener {
 
     private val TAG = "DownloadSerializer"
-    private val downloadTasks : Queue<DownloadRunnable> = ArrayDeque()
     private var activeTask : DownloadRunnable? = null
 
-    @Synchronized override fun addTask(downloadTask: List<DownloadTask>, fileDownloadListener: FileDownloadListener, priority: DownloadPriority) {
+    @Synchronized override fun addTask(downloadTask: List<DownloadTask>, fileDownloadListener: FileDownloadListener, priority: Priority) {
         Log.d(TAG, "Task added with active task $activeTask")
         downloadTasks.add(DownloadRunnable(webServiceProvider, this, fileDownloadListener, downloadTask, priority))
         if(activeTask == null){
@@ -28,7 +27,7 @@ class DownloadSerializer constructor(private val webServiceProvider: IWebService
     }
 
     @Synchronized private fun scheduleNext() {
-        activeTask = downloadTasks.poll()
+        activeTask = downloadTasks.poll() as DownloadRunnable
         activeTask?.run()
         Log.d(TAG, "Schedule next called with active task $activeTask")
     }

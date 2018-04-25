@@ -7,6 +7,9 @@ import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.Downl
  * Created on 25/04/18.
  */
 
+/**
+ *
+ */
 interface FileExecutorListener {
     fun onDownloadCompleted(downloadRunnable: DownloadRunnable)
     fun onDownloadFailed(downloadRunnable: DownloadRunnable, message : String?)

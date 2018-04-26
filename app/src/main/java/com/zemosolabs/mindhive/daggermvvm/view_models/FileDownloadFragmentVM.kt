@@ -54,6 +54,12 @@ class FileDownloadFragmentVM constructor(private val resourceProvider: IResource
     fun startDownload(view : View) {
         val downloadTasks : MutableList<DownloadTask> = ArrayList()
         downloadTasks.add(DownloadTask())
+        downloadTasks.add(DownloadTask())
+        downloadTasks.add(DownloadTask())
+        downloadTasks.add(DownloadTask())
+        downloadTasks.add(DownloadTask())
+        downloadTasks.add(DownloadTask())
+        downloadTasks.add(DownloadTask())
         downloadBinder?.startDownload(downloadTasks, this, Priority.HIGHEST, 1)
         this.isDownloadInProgress = this.isDownloadInProgress.not()
     }

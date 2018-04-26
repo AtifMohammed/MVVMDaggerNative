@@ -51,9 +51,10 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.2.40'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
-    kapt 'com.android.databinding:compiler:3.1.1'
+    kapt 'com.android.databinding:compiler:3.1.2'
     kapt "com.google.dagger:dagger-android-processor:2.15"
     kapt "com.google.dagger:dagger-compiler:2.15"
+    testImplementation 'org.mockito:mockito-core:2.18.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'

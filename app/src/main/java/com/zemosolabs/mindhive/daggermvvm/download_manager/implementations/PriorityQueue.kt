@@ -10,9 +10,12 @@ import java.util.*
  * Adds the PriorityTask to the queue based on the specified priority
  * This class handles the starvation case internally
  * This algorithm uses element priority increment strategy to prevent starvation
+ * This class overrides all the add methods to handle all the add cases
  */
 
 class PriorityQueue : LinkedList<PriorityTask>() {
+
+    private val TAG = "PriorityQueue"
 
     /**
      * Adds the priority task to respective priority range.
@@ -30,23 +33,44 @@ class PriorityQueue : LinkedList<PriorityTask>() {
      * @param element Task to be executed
      */
     override fun add(@IntRange(from = 0, to = 1) index: Int, element: PriorityTask) {
-        for (i in size..0){
-            val task = get(i)
-            val taskPriority = task.getPriority()
-            val elementPriority = element.getPriority()
-            if(taskPriority > elementPriority){
-                super.add(i+1, element)
-                return
-            }else if(taskPriority == elementPriority){
-                if(index == 0){
-                    super.add(i+1, element)
+        if(size > 0) {
+            for (i in (size - 1) downTo 0) {
+                val task = get(i)
+                val taskPriority = task.getPriority()
+                val elementPriority = element.getPriority()
+                if (taskPriority > elementPriority) {
+                    super.add(i + 1, element)
                     return
+                } else if (taskPriority == elementPriority) {
+                    if (index == 0) {
+                        super.add(i + 1, element)
+                        return
+                    }
+                } else {
+                    task.incrementPriority()
                 }
-            }else{
-                task.incrementPriority()
             }
         }
-        super.add(0, element)
+        super.addFirst(element)
+    }
+
+    override fun addFirst(element: PriorityTask) {
+        add(1, element)
+    }
+
+    override fun addLast(element: PriorityTask) {
+        add(0, element)
+    }
+
+    override fun addAll(elements: Collection<PriorityTask>): Boolean {
+        for(task in elements){
+            add(task)
+        }
+        return true
+    }
+
+    override fun addAll(index: Int, elements: Collection<PriorityTask>): Boolean {
+        return addAll(elements)
     }
 
 }

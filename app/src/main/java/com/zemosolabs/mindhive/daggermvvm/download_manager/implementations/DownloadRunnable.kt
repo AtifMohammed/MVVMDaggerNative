@@ -1,7 +1,6 @@
 package com.zemosolabs.mindhive.daggermvvm.download_manager.implementations
 
 import android.os.Handler
-import android.os.HandlerThread
 import android.os.Message
 import android.util.Log
 import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.CallbackKeys.Companion.PUBLISH_PROGRESS

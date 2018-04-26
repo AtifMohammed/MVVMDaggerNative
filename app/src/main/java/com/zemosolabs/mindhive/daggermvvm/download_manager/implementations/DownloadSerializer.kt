@@ -7,15 +7,12 @@ import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileExecut
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
 import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IWebServiceProvider
-import com.zemosolabs.mindhive.daggermvvm.services.interfaces.DownloadServiceCallback
 
 /**
  * @author atif
  * Created on 24/04/18.
  */
 class DownloadSerializer constructor(private val webServiceProvider: IWebServiceProvider, private val downloadTasks : PriorityQueue) : SerialExecutor, FileExecutorListener {
-
-    override var downloadServiceCallback: DownloadServiceCallback? = null
 
     private val TAG = "DownloadSerializer"
     private var activeTask : DownloadRunnable? = null
@@ -30,11 +27,7 @@ class DownloadSerializer constructor(private val webServiceProvider: IWebService
 
     @Synchronized private fun scheduleNext() {
         activeTask = downloadTasks.poll() as DownloadRunnable
-        if(activeTask != null){
-            activeTask!!.run()
-        }else{
-            downloadServiceCallback?.onDownloadsCompleted()
-        }
+        activeTask?.run()
         Log.d(TAG, "Schedule next called with active task $activeTask")
     }
 

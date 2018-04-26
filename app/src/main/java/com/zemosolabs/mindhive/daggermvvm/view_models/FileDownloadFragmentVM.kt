@@ -10,7 +10,7 @@ import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.Downl
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileDownloadListener
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
 import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
-import com.zemosolabs.mindhive.daggermvvm.services.binders.DownloadServiceBinder
+import com.zemosolabs.mindhive.daggermvvm.services.DownloadServiceBinder
 
 /**
  * @author atif

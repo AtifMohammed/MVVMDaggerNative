@@ -2,7 +2,6 @@ package com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces
 
 import android.support.annotation.IntRange
 import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.DownloadTask
-import com.zemosolabs.mindhive.daggermvvm.services.interfaces.DownloadServiceCallback
 
 /**
  * @author atif
@@ -10,8 +9,6 @@ import com.zemosolabs.mindhive.daggermvvm.services.interfaces.DownloadServiceCal
  * Serial Executor is similar to Executor with customized implementation
  */
 interface SerialExecutor {
-
-    var downloadServiceCallback : DownloadServiceCallback?
 
     /**
      * Adds the download task to the download singleton and initiates the downloads based on priority

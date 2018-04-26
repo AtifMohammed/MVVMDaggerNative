@@ -2,7 +2,7 @@ package com.zemosolabs.mindhive.daggermvvm.modules
 
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
 import com.zemosolabs.mindhive.daggermvvm.scopes.ActivityScope
-import com.zemosolabs.mindhive.daggermvvm.services.binders.DownloadServiceBinder
+import com.zemosolabs.mindhive.daggermvvm.services.DownloadServiceBinder
 import dagger.Module
 import dagger.Provides
 

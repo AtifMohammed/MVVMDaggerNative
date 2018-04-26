@@ -19,7 +19,7 @@ import com.zemosolabs.mindhive.daggermvvm.beans.DownloadData
 import com.zemosolabs.mindhive.daggermvvm.databinding.FragmentFileDownloadBinding
 import com.zemosolabs.mindhive.daggermvvm.service_providers.implementation.ResourceProviderImpl
 import com.zemosolabs.mindhive.daggermvvm.services.DownloadManagerService
-import com.zemosolabs.mindhive.daggermvvm.services.binders.DownloadServiceBinder
+import com.zemosolabs.mindhive.daggermvvm.services.DownloadServiceBinder
 import com.zemosolabs.mindhive.daggermvvm.view_models.FileDownloadFragmentVM
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject

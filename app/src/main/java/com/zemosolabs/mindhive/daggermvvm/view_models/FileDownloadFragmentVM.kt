@@ -7,19 +7,21 @@ import com.android.databinding.library.baseAdapters.BR
 import com.zemosolabs.mindhive.daggermvvm.R
 import com.zemosolabs.mindhive.daggermvvm.beans.DownloadData
 import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.DownloadTask
-import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileDownloadListener
-import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
 import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
+import com.zemosolabs.mindhive.daggermvvm.services.binders.DownloadServiceBinder
 
 /**
  * @author atif
  * Created on 24/04/18.
  */
-class FileDownloadFragmentVM constructor(private val downloadSerializer: SerialExecutor, private val resourceProvider: IResourceProvider) : BaseObservable(), FileDownloadListener {
+class FileDownloadFragmentVM constructor(private val resourceProvider: IResourceProvider) : BaseObservable(), FileDownloadListener {
 
     private val TAG = "FileDownloadFragmentVM"
     var downloadData : DownloadData? = null
+
+    var downloadBinder : DownloadServiceBinder? = null
 
     @Bindable var maxProgress = 100
         set(value) {
@@ -41,7 +43,7 @@ class FileDownloadFragmentVM constructor(private val downloadSerializer: SerialE
 
 
     fun getMessage() : String {
-        return downloadData!!.getDownloadUrl() + downloadSerializer
+        return downloadData!!.getDownloadUrl()
     }
 
     @Bindable(value = ["isDownloadInProgress"])
@@ -52,9 +54,7 @@ class FileDownloadFragmentVM constructor(private val downloadSerializer: SerialE
     fun startDownload(view : View) {
         val downloadTasks : MutableList<DownloadTask> = ArrayList()
         downloadTasks.add(DownloadTask())
-        if(isDownloadInProgress){
-           downloadSerializer.addTask(downloadTasks, this, Priority.HIGH)
-        }
+        downloadBinder?.startDownload(downloadTasks, this, Priority.HIGHEST, 1)
         this.isDownloadInProgress = this.isDownloadInProgress.not()
     }
 

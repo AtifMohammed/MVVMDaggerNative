@@ -16,8 +16,7 @@ class SplashActivity : AppCompatActivity(), SplashNavigator{
 
     private val TAG = "SplashActivity"
 
-    @Inject
-    lateinit var splashViewModel : SplashViewModel
+    @Inject lateinit var splashViewModel : SplashViewModel
 
     //region Activity Methods
 

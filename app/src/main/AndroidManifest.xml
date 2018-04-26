@@ -17,7 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.MainActivity" />
+
+        <service
+            android:name=".services.DownloadManagerService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

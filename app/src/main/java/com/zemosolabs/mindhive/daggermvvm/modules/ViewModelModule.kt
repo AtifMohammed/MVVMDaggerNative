@@ -1,9 +1,7 @@
 package com.zemosolabs.mindhive.daggermvvm.modules
 
-import com.zemosolabs.mindhive.daggermvvm.download_manager.implementations.DownloadSerializer
-import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
-import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
 import com.zemosolabs.mindhive.daggermvvm.scopes.ActivityScope
+import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
 import com.zemosolabs.mindhive.daggermvvm.view_models.FileDownloadFragmentVM
 import com.zemosolabs.mindhive.daggermvvm.view_models.SplashViewModel
 import dagger.Module
@@ -29,8 +27,8 @@ abstract class ViewModelModule {
         @ActivityScope
         @JvmStatic
         @Provides
-        fun provideFileDownloadVm(downloadSerializer: SerialExecutor, resourceProvider: IResourceProvider) : FileDownloadFragmentVM {
-            return FileDownloadFragmentVM(downloadSerializer, resourceProvider)
+        fun provideFileDownloadVm(resourceProvider: IResourceProvider) : FileDownloadFragmentVM {
+            return FileDownloadFragmentVM(resourceProvider)
         }
     }
 

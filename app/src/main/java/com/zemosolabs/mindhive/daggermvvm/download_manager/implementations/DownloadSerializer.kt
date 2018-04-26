@@ -2,12 +2,12 @@ package com.zemosolabs.mindhive.daggermvvm.download_manager.implementations
 
 import android.support.annotation.NonNull
 import android.util.Log
-import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileDownloadListener
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.FileExecutorListener
+import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.Priority
 import com.zemosolabs.mindhive.daggermvvm.download_manager.interfaces.SerialExecutor
 import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IWebServiceProvider
-import java.util.*
+import com.zemosolabs.mindhive.daggermvvm.services.interfaces.DownloadServiceCallback
 
 /**
  * @author atif
@@ -15,12 +15,14 @@ import java.util.*
  */
 class DownloadSerializer constructor(private val webServiceProvider: IWebServiceProvider, private val downloadTasks : PriorityQueue) : SerialExecutor, FileExecutorListener {
 
+    override var downloadServiceCallback: DownloadServiceCallback? = null
+
     private val TAG = "DownloadSerializer"
     private var activeTask : DownloadRunnable? = null
 
-    @Synchronized override fun addTask(downloadTask: List<DownloadTask>, fileDownloadListener: FileDownloadListener, priority: Priority) {
+    @Synchronized override fun addTask(downloadTask: List<DownloadTask>, fileDownloadListener: FileDownloadListener, priority: Priority, index : Int) {
         Log.d(TAG, "Task added with active task $activeTask")
-        downloadTasks.add(DownloadRunnable(webServiceProvider, this, fileDownloadListener, downloadTask, priority))
+        downloadTasks.add(index, DownloadRunnable(webServiceProvider, this, fileDownloadListener, downloadTask, priority))
         if(activeTask == null){
             scheduleNext()
         }
@@ -28,7 +30,11 @@ class DownloadSerializer constructor(private val webServiceProvider: IWebService
 
     @Synchronized private fun scheduleNext() {
         activeTask = downloadTasks.poll() as DownloadRunnable
-        activeTask?.run()
+        if(activeTask != null){
+            activeTask!!.run()
+        }else{
+            downloadServiceCallback?.onDownloadsCompleted()
+        }
         Log.d(TAG, "Schedule next called with active task $activeTask")
     }
 

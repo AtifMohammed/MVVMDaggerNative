@@ -5,10 +5,11 @@ import android.content.Context
 import android.content.res.Resources
 import com.zemosolabs.mindhive.daggermvvm.activities.MainActivity
 import com.zemosolabs.mindhive.daggermvvm.activities.SplashActivity
-import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
 import com.zemosolabs.mindhive.daggermvvm.scopes.ActivityScope
 import com.zemosolabs.mindhive.daggermvvm.scopes.ApplicationScope
 import com.zemosolabs.mindhive.daggermvvm.service_providers.implementation.ResourceProviderImpl
+import com.zemosolabs.mindhive.daggermvvm.service_providers.interfaces.IResourceProvider
+import com.zemosolabs.mindhive.daggermvvm.services.DownloadManagerService
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -29,6 +30,11 @@ abstract class ApplicationModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
     abstract fun contributeMainActivityInjector() : MainActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [DownloadServiceModule::class])
+    abstract fun contributeDownloadServiceInjection() : DownloadManagerService
+
 
     @ApplicationScope
     @Binds

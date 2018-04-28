@@ -10,5 +10,5 @@ interface IWebServiceProvider {
      * @param url url of the file to be downloaded
      * @return Temporary file loction
      */
-    fun downloadFile(url : String) : String
+    fun downloadFile(url : String, fileLocation : String?) : String
 }
